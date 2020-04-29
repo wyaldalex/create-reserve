@@ -1,10 +1,15 @@
 import { Menu, Container, Image, Icon } from "semantic-ui-react";
 import Link from "next/Link";
-import { useRouter, Router } from "next/router";
+import Router, { useRouter } from "next/router";
+import NProgress from "nprogress";
 
 function Header() {
   const router = useRouter();
   const user = true;
+
+  Router.onRouteChangeStart = () => NProgress.start();
+  Router.onRouteChangeComplete = () => NProgress.done();
+  Router.onRouteChangeError = () => NProgress.done();
 
   function isActive(route) {
     return route === router.pathname;
@@ -20,7 +25,7 @@ function Header() {
               src="/static/logo.svg"
               style={{ marginRight: "1em" }}
             />
-            ReactReserve
+            ReactReserved
           </Menu.Item>
         </Link>
 
